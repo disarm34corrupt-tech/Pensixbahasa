@@ -1,0 +1,514 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  background: #07150e;
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  overflow: hidden;
+}
+
+.scene {
+  position: fixed;
+  inset: 0;
+  display: none;
+  overflow: hidden;
+}
+
+.scene.active {
+  display: block;
+  animation: fadeIn .55s ease;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 17, 9, .34);
+  z-index: 2;
+}
+
+/* CHARACTER */
+.character,
+.reader {
+  position: absolute;
+  z-index: 3;
+  bottom: 0;
+  width: auto;
+  height: 86vh;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.assistant1 {
+  left: 3%;
+}
+
+.assistant2 {
+  right: 3%;
+}
+
+.reader,
+.reading-reader {
+  left: 4%;
+  transform: none;
+}
+
+/* PANEL */
+.dialog,
+.tarot-panel,
+.reading-box {
+  position: absolute;
+  z-index: 4;
+  background: linear-gradient(
+    135deg,
+    rgba(8, 38, 24, .94),
+    rgba(2, 28, 17, .88)
+  );
+  border: 1px solid rgba(238, 217, 148, .72);
+  border-radius: 26px;
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, .48),
+    inset 0 0 35px rgba(255, 255, 255, .03);
+  backdrop-filter: blur(9px);
+}
+
+.dialog {
+  right: 6%;
+  bottom: 8%;
+  width: min(540px, 88vw);
+  padding: 28px;
+}
+
+.tarot-panel {
+  left: 50%;
+  bottom: 4%;
+  transform: translateX(-50%);
+  width: min(920px, 94vw);
+  max-height: 82vh;
+  overflow-y: auto;
+  padding: 22px;
+  text-align: center;
+}
+
+.reading-box {
+  right: 6%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(500px, 90vw);
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: 22px;
+  text-align: center;
+}
+
+/* TEXT */
+.character-name {
+  display: inline-block;
+  background: rgba(241, 217, 139, .15);
+  border: 1px solid rgba(241, 217, 139, .45);
+  color: #f1d98b;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+h1,
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  color: #f1d98b;
+  margin: 0 0 12px;
+  line-height: 1;
+  font-size: clamp(32px, 4vw, 48px);
+}
+
+p {
+  margin: 0 0 12px;
+  line-height: 1.55;
+  font-size: 15.5px;
+  color: #f8f0d2;
+}
+
+#guideText,
+#readerLine {
+  color: #f7eac5;
+}
+
+.choice-title {
+  color: #f8e7ad;
+  font-weight: 800;
+  margin-top: 18px;
+}
+
+/* BUTTON */
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 22px;
+  background: linear-gradient(135deg, #f4e2a3, #d6bd70);
+  color: #123522;
+  font-weight: 800;
+  cursor: pointer;
+  transition: .25s ease;
+  margin: 6px 5px 0;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .2);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 18px rgba(232, 212, 142, .75),
+    0 10px 24px rgba(0, 0, 0, .25);
+}
+
+button:active {
+  transform: scale(.97);
+}
+
+.choice-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.choice-buttons button {
+  min-width: 140px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* SMALL CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.small-card {
+  aspect-ratio: 2 / 3;
+  border-radius: 14px;
+  background: url("https://cdn.jsdelivr.net/gh/disarm34corrupt-tech/Pensi@main/4_20260610_142558_0003.png") center / cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: .25s ease;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, .32);
+}
+
+.small-card:hover {
+  transform: translateY(-8px) scale(1.03);
+}
+
+.small-card.selected {
+  border-color: #f1d98b;
+  box-shadow:
+    0 0 22px rgba(241, 217, 139, .9),
+    0 14px 25px rgba(0, 0, 0, .35);
+  transform: translateY(-10px);
+}
+
+/* BIG CARD */
+.big-card {
+  width: min(260px, 58vw);
+  aspect-ratio: 2 / 3;
+  margin: 0 auto 16px;
+  perspective: 1200px;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform .9s cubic-bezier(.2, .8, .2, 1);
+}
+
+.big-card.open .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  backface-visibility: hidden;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(0, 0, 0, .5);
+}
+
+.card-back {
+  background: url("https://cdn.jsdelivr.net/gh/disarm34corrupt-tech/Pensi@main/4_20260610_142558_0003.png") center / cover;
+}
+
+.card-front {
+  background: url("https://cdn.jsdelivr.net/gh/disarm34corrupt-tech/Pensi@main/5_20260610_142558_0004.png") center / cover;
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 18px;
+}
+
+.card-text {
+  width: 84%;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, .82);
+}
+
+.card-text h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  margin: 0 0 10px;
+  color: #ffe28c;
+  line-height: 1.05;
+}
+
+.card-text p {
+  margin: 0;
+  font-size: 12.8px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: #f9edc2;
+}
+
+/* RECAP */
+.recap-dialog {
+  right: 6%;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  width: min(650px, 92vw);
+  max-height: 82vh;
+  overflow-y: auto;
+  padding: 22px;
+}
+
+.recap-list {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.recap-card {
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(241, 217, 139, .32);
+  border-radius: 18px;
+  padding: 14px;
+  text-align: left;
+}
+
+.recap-card h3 {
+  margin: 0 0 4px;
+  color: #f1d98b;
+  font-size: 15px;
+}
+
+.recap-card h4 {
+  margin: 0 0 8px;
+  color: #fff7cf;
+  font-size: 18px;
+}
+
+.recap-card p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.closing-text {
+  color: #f8e7ad;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* TABLET + MOBILE */
+@media(max-width:1024px) {
+
+  .scene::after {
+    background: rgba(2, 17, 9, .32);
+  }
+
+  .assistant1 {
+    left: -8vw;
+    right: auto;
+    bottom: -2vh;
+    height: 36vh;
+  }
+
+  .assistant2 {
+    right: -8vw;
+    left: auto;
+    bottom: -2vh;
+    height: 36vh;
+  }
+
+  .reader,
+  .reading-reader {
+    left: -8vw;
+    right: auto;
+    bottom: -2vh;
+    height: 32vh;
+    transform: none;
+  }
+
+  .dialog,
+  .tarot-panel,
+  .reading-box,
+  .recap-dialog {
+    left: 50%;
+    right: auto;
+    top: 5%;
+    bottom: auto;
+    transform: translateX(-50%);
+    width: 94vw;
+    max-height: 88vh;
+    overflow-y: auto;
+    padding: 18px 16px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 12px 0;
+  }
+
+  .choice-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .choice-buttons button {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .big-card {
+    width: min(185px, 52vw);
+    margin: 10px auto 14px;
+  }
+
+  .card-text h3 {
+    font-size: 17px;
+  }
+
+  .card-text p {
+    font-size: 11.5px;
+    line-height: 1.3;
+  }
+
+  .recap-list {
+    gap: 10px;
+    margin: 14px 0;
+  }
+
+  .recap-card {
+    padding: 12px;
+  }
+
+  .recap-card h4 {
+    font-size: 16px;
+  }
+
+  .recap-card p {
+    font-size: 13px;
+  }
+
+  h1,
+  h2 {
+    font-size: clamp(25px, 7vw, 36px);
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .character-name {
+    font-size: 12px;
+  }
+
+  button {
+    padding: 11px 18px;
+  }
+}
+
+/* SMALL PHONE */
+@media(max-width:390px) {
+
+  .dialog,
+  .tarot-panel,
+  .reading-box,
+  .recap-dialog {
+    padding: 14px 12px;
+    border-radius: 22px;
+  }
+
+  .assistant1 {
+    left: -13vw;
+    bottom: -2vh;
+    height: 32vh;
+  }
+
+  .assistant2 {
+    right: -13vw;
+    bottom: -2vh;
+    height: 32vh;
+  }
+
+  .reader,
+  .reading-reader {
+    left: -10vw;
+    bottom: -2vh;
+    height: 28vh;
+  }
+
+  .big-card {
+    width: min(165px, 54vw);
+  }
+
+  .cards {
+    gap: 6px;
+  }
+
+  h1,
+  h2 {
+    font-size: 23px;
+  }
+
+  p {
+    font-size: 13.5px;
+  }
+
+  .card-text h3 {
+    font-size: 15.5px;
+  }
+
+  .card-text p {
+    font-size: 11px;
+  }
+}

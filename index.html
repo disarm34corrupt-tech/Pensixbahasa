@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Tarot X Bahasa</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div id="app">
+  <section class="scene active" id="sceneStart">
+    <img class="bg" src="https://cdn.jsdelivr.net/gh/disarm34corrupt-tech/Pensi@main/1_20260610_142729_0000.png">
+    <img class="character assistant1" src="https://cdn.jsdelivr.net/gh/disarm34corrupt-tech/Pensi@main/2_20260610_142558_0001.png">
+
+    <div class="dialog">
+      <span class="character-name">Asisten Tarot</span>
+      <h1>Ruang Tarot X Bahasa</h1>
+      <p id="assistantOneText"></p>
+      <div id="choiceArea"></div>
+      <button id="startBtn" class="hidden" onclick="goScene('sceneIntro')">Lanjut Masuk</button>
+    </div>
+  </section>
+
+  <section class="scene" id="sceneIntro">
+    <img class="bg" src="https://cdn.jsdelivr.net/gh/disarm34corrupt-tech/Pensi@main/3_20260610_142729_0002.png">
+    <img class="character assistant1" src="https://cdn.jsdelivr.net/gh/disarm34corrupt-tech/Pensi@main/2_20260610_142558_0001.png">
+
+    <div class="dialog">
+      <span class="character-name">Asisten Tarot</span>
+      <h2>Sebelum Ketemu Arum...</h2>
+      <p id="introText"></p>
+      <button onclick="goScene('sceneChoose')">Temui Arum</button>
+    </div>
+  </section>
+
+  <section class="scene" id="sceneChoose">
+    <img class="bg" src="https://cdn.jsdelivr.net/gh/disarm34corrupt-tech/Pensi@main/2_20260610_142729_0001.png">
+    <img class="reader" src="https://cdn.jsdelivr.net/gh/disarm34corrupt-tech/Pensi@main/1_20260610_142558_0000.png">
+
+    <div class="tarot-panel">
+      <span class="character-name">Arum</span>
+      <h2>Pilih 3 Kartu</h2>
+      <p id="arumText"></p>
+      <p id="guideText">Pilih tiga kartu yang paling menarik perhatianmu.</p>
+      <div class="cards" id="cardArea"></div>
+      <button id="readBtn" class="hidden" onclick="startReading()">Mulai Pembacaan</button>
+    </div>
+  </section>
+
+  <section class="scene" id="sceneReading">
+    <img class="bg" src="https://cdn.jsdelivr.net/gh/disarm34corrupt-tech/Pensi@main/2_20260610_142729_0001.png">
+    <img class="reader reading-reader" src="https://cdn.jsdelivr.net/gh/disarm34corrupt-tech/Pensi@main/1_20260610_142558_0000.png">
+
+    <div class="reading-box">
+      <span class="character-name">Arum</span>
+      <h2 id="readingTitle"></h2>
+      <p id="readerLine"></p>
+
+      <div class="big-card" id="bigCard">
+        <div class="card-inner">
+          <div class="card-face card-back"></div>
+          <div class="card-face card-front">
+            <div class="card-text">
+              <h3 id="cardTitle"></h3>
+              <p id="cardMessage"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button id="nextBtn" onclick="nextReading()">Buka Kartu</button>
+    </div>
+  </section>
+
+  <section class="scene" id="sceneEnd">
+    <img class="bg" src="https://cdn.jsdelivr.net/gh/disarm34corrupt-tech/Pensi@main/4_20260610_142729_0003.png">
+    <img class="character assistant2" src="https://cdn.jsdelivr.net/gh/disarm34corrupt-tech/Pensi@main/3_20260610_142558_0002.png">
+
+    <div class="dialog">
+      <span class="character-name">Asisten Tarot</span>
+      <h2>Makasih Sudah Mampir 💚</h2>
+      <p id="assistantTwoText"></p>
+      <button onclick="restartGame()">Main Lagi</button>
+    </div>
+  </section>
+</div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
