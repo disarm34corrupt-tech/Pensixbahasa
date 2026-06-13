@@ -15,6 +15,7 @@ body {
   overflow: hidden;
 }
 
+/* SCENE */
 .scene {
   position: fixed;
   inset: 0;
@@ -351,75 +352,106 @@ button:active {
 @media(max-width:1024px) {
 
   .scene::after {
-    background: rgba(2, 17, 9, .32);
+    background: rgba(2, 17, 9, .30);
   }
 
   .assistant1 {
-    left: -8vw;
+    left: -6vw;
     right: auto;
     bottom: -2vh;
-    height: 36vh;
+    height: 45vh;
   }
 
   .assistant2 {
-    right: -8vw;
+    right: -6vw;
     left: auto;
     bottom: -2vh;
-    height: 36vh;
+    height: 45vh;
   }
 
   .reader,
   .reading-reader {
-    left: -8vw;
+    left: -4vw;
     right: auto;
     bottom: -2vh;
-    height: 32vh;
+    height: 48vh;
     transform: none;
   }
 
-  .dialog,
-  .tarot-panel,
-  .reading-box,
-  .recap-dialog {
+  .dialog {
+    left: auto;
+    right: 3%;
+    top: auto;
+    bottom: 5%;
+    transform: none;
+    width: 56vw;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 22px;
+  }
+
+  .tarot-panel {
     left: 50%;
     right: auto;
     top: 5%;
     bottom: auto;
     transform: translateX(-50%);
-    width: 94vw;
+    width: 92vw;
     max-height: 88vh;
     overflow-y: auto;
-    padding: 18px 16px;
+    padding: 20px;
+  }
+
+  .reading-box {
+    left: auto;
+    right: 3%;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    width: 56vw;
+    max-height: 78vh;
+    overflow-y: auto;
+    padding: 20px;
+  }
+
+  .recap-dialog {
+    left: auto;
+    right: 3%;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    width: 60vw;
+    max-height: 82vh;
+    overflow-y: auto;
+    padding: 20px;
   }
 
   .cards {
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin: 12px 0;
+    gap: 10px;
+    margin: 14px 0;
   }
 
   .choice-buttons {
-    flex-direction: column;
     gap: 8px;
   }
 
   .choice-buttons button {
-    width: 100%;
-    min-width: unset;
+    min-width: 130px;
   }
 
   .big-card {
-    width: min(185px, 52vw);
+    width: min(220px, 38vw);
     margin: 10px auto 14px;
   }
 
   .card-text h3 {
-    font-size: 17px;
+    font-size: 18px;
   }
 
   .card-text p {
-    font-size: 11.5px;
-    line-height: 1.3;
+    font-size: 12px;
+    line-height: 1.32;
   }
 
   .recap-list {
@@ -441,7 +473,7 @@ button:active {
 
   h1,
   h2 {
-    font-size: clamp(25px, 7vw, 36px);
+    font-size: clamp(28px, 5vw, 42px);
   }
 
   p {
@@ -458,57 +490,90 @@ button:active {
 }
 
 /* SMALL PHONE */
-@media(max-width:390px) {
+@media(max-width:480px) {
 
-  .dialog,
-  .tarot-panel,
-  .reading-box,
-  .recap-dialog {
-    padding: 14px 12px;
-    border-radius: 22px;
+  .scene::after {
+    background: rgba(2, 17, 9, .34);
   }
 
   .assistant1 {
-    left: -13vw;
-    bottom: -2vh;
-    height: 32vh;
+    left: -18vw;
+    bottom: -4vh;
+    height: 34vh;
   }
 
   .assistant2 {
-    right: -13vw;
-    bottom: -2vh;
-    height: 32vh;
+    right: -18vw;
+    bottom: -4vh;
+    height: 34vh;
   }
 
   .reader,
   .reading-reader {
-    left: -10vw;
-    bottom: -2vh;
-    height: 28vh;
+    left: -16vw;
+    bottom: -4vh;
+    height: 36vh;
   }
 
-  .big-card {
-    width: min(165px, 54vw);
+  .dialog,
+  .reading-box,
+  .recap-dialog {
+    left: 50%;
+    right: auto;
+    top: 5%;
+    bottom: auto;
+    transform: translateX(-50%);
+    width: 94vw;
+    max-height: 88vh;
+    overflow-y: auto;
+    padding: 16px 14px;
+  }
+
+  .tarot-panel {
+    left: 50%;
+    right: auto;
+    top: 5%;
+    bottom: auto;
+    transform: translateX(-50%);
+    width: 94vw;
+    max-height: 88vh;
+    padding: 16px 14px;
   }
 
   .cards {
-    gap: 6px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 12px 0;
   }
 
-  h1,
-  h2 {
-    font-size: 23px;
+  .choice-buttons {
+    flex-direction: column;
+    gap: 8px;
   }
 
-  p {
-    font-size: 13.5px;
+  .choice-buttons button {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .big-card {
+    width: min(180px, 52vw);
   }
 
   .card-text h3 {
-    font-size: 15.5px;
+    font-size: 16px;
   }
 
   .card-text p {
     font-size: 11px;
+  }
+
+  h1,
+  h2 {
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 13.5px;
   }
 }
